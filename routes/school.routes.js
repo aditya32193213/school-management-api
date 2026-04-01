@@ -2,7 +2,7 @@ import express from "express";
 import {
   addSchool,
   listSchools,
-} from "../controllers/school.controller.js";
+} from "../controller/school.controller.js";
 
 const router = express.Router();
 
