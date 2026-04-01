@@ -123,7 +123,7 @@ CREATE TABLE schools (
 ### 1. Clone & install
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/aditya32193213/school-management-api.git
 cd school-api
 npm install
 ```
@@ -155,7 +155,7 @@ You should see:
 
 ```
 ✅ MySQL Connected (pool ready)
-🚀 Server running at http://localhost:3000
+🚀 Server running at http://localhost:5000
 ```
 
 ---
@@ -165,7 +165,7 @@ You should see:
 ### Base URL
 
 ```
-http://localhost:3000/api
+http://localhost:5000/api
 ```
 
 ---
