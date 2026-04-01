@@ -56,7 +56,7 @@ school-api/
 │   └── db.js                   # MySQL connection pool
 ├── routes/
 │   └── school.routes.js        # Route definitions
-├── controllers/
+├── controller/
 │   └── school.controller.js    # Request validation & response shaping
 ├── services/
 │   └── school.service.js       # Business logic & DB queries
