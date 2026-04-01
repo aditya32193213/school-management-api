@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "School Management API",
+    "_postman_id": "school-api-collection-v1",
+    "description": "Postman collection for the School Management Node.js API.\n\nBase URL: {{base_url}}\n\nSet the `base_url` variable in your environment (e.g. http://localhost:3000).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        },
+        "description": "Verify the API server is up and running."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "body": "API is running..."
+        }
+      ]
+    },
+    {
+      "name": "Add School",
+      "item": [
+        {
+          "name": "Add School – Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi, Delhi 110003\",\n  \"latitude\": 28.5494,\n  \"longitude\": 77.2001\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/addSchool",
+              "host": ["{{base_url}}"],
+              "path": ["api", "addSchool"]
+            },
+            "description": "Adds a new school to the database. All four fields are required."
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"message\": \"School added successfully\",\n  \"data\": {\n    \"id\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Add School – Missing Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Incomplete School\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/addSchool",
+              "host": ["{{base_url}}"],
+              "path": ["api", "addSchool"]
+            },
+            "description": "Expects a 400 when required fields are missing."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": false,\n  \"message\": \"All fields are required: name, address, latitude, longitude\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Add School – Invalid Coordinates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bad Coords School\",\n  \"address\": \"Somewhere\",\n  \"latitude\": 999,\n  \"longitude\": -999\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/addSchool",
+              "host": ["{{base_url}}"],
+              "path": ["api", "addSchool"]
+            },
+            "description": "Expects a 400 when lat/lon are out of valid range."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": false,\n  \"message\": \"Latitude must be between -90 and 90; longitude between -180 and 180\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Add School – Non-numeric Coordinates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ABC School\",\n  \"address\": \"123 Main St\",\n  \"latitude\": \"abc\",\n  \"longitude\": \"xyz\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/addSchool",
+              "host": ["{{base_url}}"],
+              "path": ["api", "addSchool"]
+            },
+            "description": "Expects a 400 when coordinates are non-numeric strings."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": false,\n  \"message\": \"Latitude and longitude must be valid numbers\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "item": [
+        {
+          "name": "List Schools – Success (sorted by proximity)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/listSchools?latitude=28.6139&longitude=77.2090",
+              "host": ["{{base_url}}"],
+              "path": ["api", "listSchools"],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.6139",
+                  "description": "User's latitude (New Delhi)"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.2090",
+                  "description": "User's longitude (New Delhi)"
+                }
+              ]
+            },
+            "description": "Fetches all schools sorted by distance (km) from the given coordinates. Each school object includes a `distance_km` field."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"count\": 2,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Mathura Road, New Delhi, Delhi 110003\",\n      \"latitude\": \"28.54940000\",\n      \"longitude\": \"77.20010000\",\n      \"created_at\": \"2026-04-02T00:00:00.000Z\",\n      \"distance_km\": 7.63\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Springdales School\",\n      \"address\": \"Pusa Road, New Delhi\",\n      \"latitude\": \"28.64540000\",\n      \"longitude\": \"77.16780000\",\n      \"created_at\": \"2026-04-02T00:00:00.000Z\",\n      \"distance_km\": 3.91\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "List Schools – Missing Params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/listSchools",
+              "host": ["{{base_url}}"],
+              "path": ["api", "listSchools"]
+            },
+            "description": "Expects 400 when latitude and longitude query params are not provided."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": false,\n  \"message\": \"Query params latitude and longitude are required\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "List Schools – Invalid Coordinates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/listSchools?latitude=200&longitude=400",
+              "host": ["{{base_url}}"],
+              "path": ["api", "listSchools"],
+              "query": [
+                { "key": "latitude", "value": "200" },
+                { "key": "longitude", "value": "400" }
+              ]
+            },
+            "description": "Expects 400 when coordinates are out of valid geographic range."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": false,\n  \"message\": \"Invalid latitude or longitude values\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
