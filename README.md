@@ -25,10 +25,7 @@
 
 | Resource       | URL |
 |---------------|-----|
-| Base API URL  | [Open](https://school-management-api-production-df44.up.railway.app/) |
-| Health Check  | [Open](https://school-management-api-production-df44.up.railway.app/) |
-| Add School    | [Open](https://school-management-api-production-df44.up.railway.app/api/addSchool) |
-| List Schools  | [Open](https://school-management-api-production-df44.up.railway.app/api/listSchools) |
+| Deployed URL  | [Open](https://school-management-api-production-df44.up.railway.app/) |
 
 > ⚙️ Deployed on **[Railway]**. Replace the placeholders above once the service is live.
 
