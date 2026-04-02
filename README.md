@@ -23,12 +23,12 @@
 
 ## 🌐 Live Demo
 
-| Resource | URL |
-|----------|-----|
-| **Base API URL** | 🔗 _[`https://school-management-api-production-df44.up.railway.app/`]_ |
-| **Health Check** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//`]_ |
-| **Add School** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//api/addSchool`]_ |
-| **List Schools** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//api/listSchools`]_ |
+| Resource       | URL |
+|---------------|-----|
+| Base API URL  | [Open](https://school-management-api-production-df44.up.railway.app/) |
+| Health Check  | [Open](https://school-management-api-production-df44.up.railway.app/) |
+| Add School    | [Open](https://school-management-api-production-df44.up.railway.app/api/addSchool) |
+| List Schools  | [Open](https://school-management-api-production-df44.up.railway.app/api/listSchools) |
 
 > ⚙️ Deployed on **[Railway]**. Replace the placeholders above once the service is live.
 
