@@ -6,6 +6,7 @@
 
 ## 📋 Table of Contents
 
+- [🌐 Live Demo](#-live-demo)
 - [✨ Features](#-features)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📁 Project Structure](#-project-structure)
@@ -20,7 +21,18 @@
 
 ---
 
-## ✨ Features
+## 🌐 Live Demo
+
+| Resource | URL |
+|----------|-----|
+| **Base API URL** | 🔗 _[`https://school-management-api-production-df44.up.railway.app/`]_ |
+| **Health Check** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//`]_ |
+| **Add School** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//api/addSchool`]_ |
+| **List Schools** | 🔗 _[`https://school-management-api-production-df44.up.railway.app//api/listSchools`]_ |
+
+> ⚙️ Deployed on **[Railway]**. Replace the placeholders above once the service is live.
+
+
 
 - ➕ **Add School** — Validate and persist school records (name, address, coordinates)
 - 📍 **List Schools by Proximity** — Returns all schools sorted by distance from the user's location
@@ -164,8 +176,14 @@ You should see:
 
 ### Base URL
 
+**Local:**
 ```
 http://localhost:5000/api
+```
+
+**Deployed:** _(replace once live)_
+```
+https://<your-deployed-url>/api
 ```
 
 ---
